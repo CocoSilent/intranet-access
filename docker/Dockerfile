@@ -16,6 +16,6 @@ RUN apt update \
     && ln -sf ${WORK_DIR}/docker/git_pull.sh /usr/local/bin/git_pull \
     && cp -f ${WORK_DIR}/docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh \
     && chmod 777 /usr/local/bin/docker-entrypoint.sh \
-    $$ echo ${WORK_DIR}
+    && echo ${WORK_DIR}
 WORKDIR ${WORK_DIR}
 ENTRYPOINT ["docker-entrypoint.sh"]
