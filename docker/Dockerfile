@@ -1,0 +1,20 @@
+FROM nginx
+LABEL maintainer="Evine Deng"
+ARG BASE_URL=https://ghproxy.com/https://github.com/CocoSilent/intranet-access
+ARG BASE_BRANCH=main
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    LANG=zh_CN.UTF-8 \
+    SHELL=/bin/bash \
+    PS1="\u@\h:\w \$ " \
+    WORK_DIR=/intranet-access \
+    ENABLE_HANGUP=true \
+    ENABLE_WEB_PANEL=true
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo "Asia/Shanghai" > /etc/timezone \
+    && git clone -b ${BASE_BRANCH} ${BASE_URL} ${JD_DIR} \
+    && cd ${WORK_DIR}/ \
+    && ln -sf ${JD_DIR}/docker/git_pull.sh /usr/local/bin/git_pull \
+    && cp -f ${JD_DIR}/docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh \
+    && chmod 777 /usr/local/bin/docker-entrypoint.sh \
+WORKDIR ${WORK_DIR}
+ENTRYPOINT ["docker-entrypoint.sh"]
