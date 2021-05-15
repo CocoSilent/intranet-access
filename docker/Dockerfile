@@ -7,8 +7,6 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     SHELL=/bin/bash \
     PS1="\u@\h:\w \$ " \
     WORK_DIR=/intranet-access \
-    ENABLE_HANGUP=true \
-    ENABLE_WEB_PANEL=true
 RUN apt update \
     && apt install -y git \
     && git clone -b ${BASE_BRANCH} ${BASE_URL} ${WORK_DIR} \
