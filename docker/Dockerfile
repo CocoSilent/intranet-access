@@ -11,8 +11,6 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     ENABLE_WEB_PANEL=true
 RUN apt update \
     && apt install -y git \
-    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo "Asia/Shanghai" > /etc/timezone \
     && git clone -b ${BASE_BRANCH} ${BASE_URL} ${JD_DIR} \
     && cd ${WORK_DIR}/ \
     && ln -sf ${JD_DIR}/docker/git_pull.sh /usr/local/bin/git_pull \
