@@ -1,5 +1,5 @@
 FROM nginx
-LABEL maintainer="Evine Deng"
+LABEL maintainer="nextgods"
 ARG BASE_URL=https://ghproxy.com/https://github.com/CocoSilent/intranet-access
 ARG BASE_BRANCH=main
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
