@@ -11,7 +11,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     ENABLE_WEB_PANEL=true
 RUN apt update \
     && apt install -y git \
-    && git clone -b ${BASE_BRANCH} ${BASE_URL} ${JD_DIR} \
+    && git clone -b ${BASE_BRANCH} ${BASE_URL} ${WORK_DIR} \
     && cd ${WORK_DIR}/ \
     && ln -sf ${WORK_DIR}/docker/git_pull.sh /usr/local/bin/git_pull \
     && cp -f ${WORK_DIR}/docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh \
