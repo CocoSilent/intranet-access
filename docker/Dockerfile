@@ -1,4 +1,4 @@
-FROM nginx
+FROM nginx:stable-alpine
 LABEL maintainer="nextgods"
 ARG BASE_URL=https://ghproxy.com/https://github.com/CocoSilent/intranet-access
 ARG BASE_BRANCH=main
@@ -7,8 +7,14 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     SHELL=/bin/bash \
     PS1="\u@\h:\w \$ " \
     WORK_DIR=/intranet-access
-RUN apt update \
-    && apt install -y git \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+    && apk update -f \
+        && apk upgrade \
+        && apk --no-cache add -f bash \
+                                 git \
+        && rm -rf /var/cache/apk/* \
+        && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+        && echo "Asia/Shanghai" > /etc/timezone \
     && git clone -b ${BASE_BRANCH} ${BASE_URL} ${WORK_DIR} \
     && cd ${WORK_DIR}/ \
     && ln -sf ${WORK_DIR}/docker/git_pull.sh /usr/local/bin/git_pull \

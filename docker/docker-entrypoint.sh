@@ -13,7 +13,7 @@ bash git_pull
 echo
 
 echo -e "容器启动成功...\n"
-sed "5c proxy_pass  $ADDRESS1;" /etc/nginx/conf.d/address1.conf
+sed -i "5c proxy_pass  $ADDRESS1;" /etc/nginx/conf.d/address1.conf
 
 nginx
 
