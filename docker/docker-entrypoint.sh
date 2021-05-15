@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-if [ ! ${$ADDRESS1} ]; then
+if [ ! ${ADDRESS1} ]; then
   echo -e "没有配置要访问的Ip地址的环境变量ADDRESS1 ...\n"
   exit 1
 fi
