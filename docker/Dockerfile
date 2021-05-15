@@ -6,7 +6,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     SHELL=/bin/bash \
     PS1="\u@\h:\w \$ " \
-    WORK_DIR=/intranet-access \
+    WORK_DIR=/intranet-access
 RUN apt update \
     && apt install -y git \
     && git clone -b ${BASE_BRANCH} ${BASE_URL} ${WORK_DIR} \
