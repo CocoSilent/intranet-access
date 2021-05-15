@@ -12,6 +12,8 @@ RUN apt update \
     && git clone -b ${BASE_BRANCH} ${BASE_URL} ${WORK_DIR} \
     && cd ${WORK_DIR}/ \
     && ln -sf ${WORK_DIR}/docker/git_pull.sh /usr/local/bin/git_pull \
+    && cp -f ${WORK_DIR}/docker/address1.conf  /etc/nginx/conf.d/address1.conf \
+    && mv  /etc/nginx/conf.d/default.conf  /etc/nginx/conf.d/default.conf2 \
     && cp -f ${WORK_DIR}/docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh \
     && chmod 777 /usr/local/bin/docker-entrypoint.sh \
     && echo ${WORK_DIR}
