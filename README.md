@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+## 功能说明
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+本docker主要用于外网访问内网服务，特别轻量只有16.2MB，内存占用极少，相比那些在虚拟机中打开浏览器的来访问内网的方案显得特别轻巧
 
-## Available Scripts
+主要适用以下几种情况
 
-In the project directory, you can run:
+1. 路由器端口转发不支持转发自已，如华为路由器，家庭宽带没有80端口，那么就外网就无法访问路由器了
+2，有些临时服务，不方便改进路由页面改端口转发，此docker只需在环境变量改一下内网地址即可
+3，有些服务没有密码如Portainer，或者其他不想公开访问的服务，只需想进入时启动本docker就可以访问了
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 实现原理
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+通过nginx转发，来访问内网服务
+管理端口  3450  预留，准备后续做一个管理页面
 
-### `yarn test`
+内网端口  3451  转发至环境变量 ADDRESS1
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+后续做了管理界面后， 3452 3453 3454 依次类推
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 免责声明
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. 此仓储脚本仅用于学习研究，不保证其合法性、准确性、有效性，请根据情况自行判断，本人对此不承担任何保证责任。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. 由于此仓储脚本仅用于学习研究，您必须在下载后 24 小时内将所有内容从您的计算机或手机或任何存储设备中完全删除，若违反规定引起任何事件本人对此均不负责。
 
-### `yarn eject`
+3. 请勿将此仓储脚本用于任何商业或非法目的，若违反规定请自行对此负责。
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+4. 此仓储脚本涉及应用与本人无关，本人对因此引起的任何隐私泄漏或其他后果不承担任何责任。
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. 本人对任何脚本引发的问题概不负责，包括但不限于由脚本错误引起的任何损失和损害。
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+6. 如果任何单位或个人认为此仓储脚本可能涉嫌侵犯其权利，应及时通知并提供身份证明，所有权证明，我们将在收到认证文件确认后删除此仓储脚本。
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+7. 所有直接或间接使用、查看此仓储脚本的人均应该仔细阅读此声明。本人保留随时更改或补充此声明的权利。一旦您使用或复制了此仓储脚本，即视为您已接受此免责声明。
 
-## Learn More
+## 使用方法
+ ```
+ docker run -dit \
+	-p 3451:3451 \
+	-e ADDRESS1=http://192.168.3.1:80/ \
+	--name intranet-access \
+	nextgods/intranet-access:latest
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+等待数分钟后，即可访问 http://{ip}:3451/
 
-To learn React, check out the [React documentation](https://reactjs.org/).
