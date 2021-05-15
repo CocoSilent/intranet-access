@@ -11,6 +11,6 @@ echo
 
 echo -e "容器启动成功...\n"
 
-bash nginx
+nginx
 
 bash
